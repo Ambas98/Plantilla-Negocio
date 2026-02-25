@@ -1,0 +1,65 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+  CSS custom properties (brand colors) are injected dynamically
+  via the <style> tag in app/layout.tsx.
+  These values serve as fallbacks only.
+*/
+:root {
+  --primary-color: #2563EB;
+  --secondary-color: #10B981;
+  --background-color: #FFFFFF;
+  --text-color: #1F2937;
+  --text-light-color: #6B7280;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+@layer utilities {
+  .transition-smooth {
+    transition: all 0.3s ease-in-out;
+  }
+}
+
+/* Skip-to-content link for keyboard / screen-reader users */
+.skip-to-content {
+  position: absolute;
+  top: -100%;
+  left: 1rem;
+  z-index: 9999;
+  padding: 0.5rem 1rem;
+  background: var(--primary-color);
+  color: #fff;
+  border-radius: 0 0 0.5rem 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  transition: top 0.2s;
+}
+.skip-to-content:focus {
+  top: 0;
+}
+
+/* WhatsApp floating button */
+.whatsapp-float {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 100;
+}
+
+/* Responsive images */
+img {
+  max-width: 100%;
+  height: auto;
+}

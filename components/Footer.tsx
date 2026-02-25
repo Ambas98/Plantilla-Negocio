@@ -1,0 +1,122 @@
+'use client'
+
+import { siteConfig } from '@/config/client-config'
+import {
+  FaFacebook, FaInstagram, FaTwitter, FaLinkedin,
+  FaWhatsapp, FaPhone, FaEnvelope, FaMapMarkerAlt, FaClock,
+} from 'react-icons/fa'
+
+const socialIcons = {
+  facebook:  FaFacebook,
+  instagram: FaInstagram,
+  twitter:   FaTwitter,
+  linkedin:  FaLinkedin,
+}
+
+const daysOrder = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'] as const
+const daysShort: Record<string, string> = {
+  monday: 'Lun', tuesday: 'Mar', wednesday: 'Mié',
+  thursday: 'Jue', friday: 'Vie', saturday: 'Sáb', sunday: 'Dom',
+}
+
+export default function Footer() {
+  const currentYear = new Date().getFullYear()
+
+  return (
+    <footer className="bg-gray-900 text-white py-14">
+      <div className="container mx-auto px-4">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-10">
+
+          {/* Info del negocio */}
+          <div>
+            <h3 className="text-xl font-bold mb-3" style={{ color: siteConfig.colors.secondary }}>
+              {siteConfig.businessName}
+            </h3>
+            <p className="text-gray-400 text-sm leading-relaxed mb-3">{siteConfig.tagline}</p>
+            <div className="flex items-start gap-2 text-gray-400 text-sm">
+              <FaMapMarkerAlt className="mt-0.5 shrink-0" aria-hidden="true" />
+              <span>{siteConfig.contact.address}</span>
+            </div>
+          </div>
+
+          {/* Contacto */}
+          <div>
+            <h4 className="text-base font-semibold mb-4 text-white">Contacto</h4>
+            <div className="space-y-3">
+              <a
+                href={`tel:${siteConfig.contact.phone}`}
+                className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors text-sm"
+              >
+                <FaPhone aria-hidden="true" />
+                {siteConfig.contact.phone}
+              </a>
+              <a
+                href={`https://wa.me/${siteConfig.contact.whatsapp}?text=${encodeURIComponent(siteConfig.whatsappMessage)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors text-sm"
+              >
+                <FaWhatsapp aria-hidden="true" />
+                WhatsApp
+              </a>
+              <a
+                href={`mailto:${siteConfig.contact.email}`}
+                className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors text-sm break-all"
+              >
+                <FaEnvelope aria-hidden="true" />
+                {siteConfig.contact.email}
+              </a>
+            </div>
+          </div>
+
+          {/* Horarios */}
+          <div>
+            <h4 className="text-base font-semibold mb-4 text-white flex items-center gap-2">
+              <FaClock aria-hidden="true" /> Horarios
+            </h4>
+            <dl className="space-y-1.5">
+              {daysOrder.map((day) => {
+                const hours = siteConfig.hours[day]
+                const isClosed = hours === 'Cerrado'
+                return (
+                  <div key={day} className="flex justify-between text-xs gap-3">
+                    <dt className="text-gray-500">{daysShort[day]}</dt>
+                    <dd className={isClosed ? 'text-red-400' : 'text-gray-300'}>{hours}</dd>
+                  </div>
+                )
+              })}
+            </dl>
+          </div>
+
+          {/* Redes sociales */}
+          <div>
+            <h4 className="text-base font-semibold mb-4 text-white">Seguinos</h4>
+            <div className="flex flex-wrap gap-3">
+              {Object.entries(siteConfig.social).map(([platform, url]) => {
+                if (!url) return null
+                const Icon = socialIcons[platform as keyof typeof socialIcons]
+                if (!Icon) return null
+                return (
+                  <a
+                    key={platform}
+                    href={url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 text-gray-400 hover:bg-gray-700 hover:text-white transition-colors"
+                    aria-label={`Seguinos en ${platform}`}
+                  >
+                    <Icon className="text-lg" />
+                  </a>
+                )
+              })}
+            </div>
+          </div>
+        </div>
+
+        <div className="border-t border-gray-800 pt-8 text-center text-gray-500 text-sm">
+          <p>© {currentYear} {siteConfig.businessName}. Todos los derechos reservados.</p>
+        </div>
+      </div>
+    </footer>
+  )
+}
