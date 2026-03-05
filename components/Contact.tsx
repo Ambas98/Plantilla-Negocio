@@ -13,6 +13,10 @@ type FormData = {
 
 type FormErrors = Partial<Record<keyof FormData, string>>
 
+function isFormField(key: string): key is keyof FormData {
+  return ['name', 'email', 'phone', 'message'].includes(key)
+}
+
 const fadeLeft: Variants = {
   hidden: { opacity: 0, x: -30 },
   visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: 'easeOut' } },
@@ -57,7 +61,7 @@ export default function Contact() {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
     setFormData((prev) => ({ ...prev, [name]: value }))
-    if (errors[name as keyof FormData]) {
+    if (isFormField(name) && errors[name]) {
       setErrors((prev) => ({ ...prev, [name]: undefined }))
     }
   }
@@ -95,7 +99,8 @@ export default function Contact() {
   // Simple Google Maps embed — works without an API key
   const mapSrc = `https://maps.google.com/maps?q=${siteConfig.location.lat},${siteConfig.location.lng}&z=15&output=embed`
 
-  // Applies --tw-ring-color so Tailwind's focus:ring-2 picks up the brand color
+  // CSS custom properties no están en los tipos estándar de React.CSSProperties —
+  // el cast es inevitable para inyectar tokens de Tailwind vía inline style.
   const focusRingStyle = { '--tw-ring-color': siteConfig.colors.primary } as React.CSSProperties
 
   return (

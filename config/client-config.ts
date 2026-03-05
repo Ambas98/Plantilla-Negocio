@@ -151,7 +151,13 @@ export const siteConfig = {
   formspreeId: "mwkagzkp",  // Reemplaza con el ID real
 
   // ==========================================
-  // 13. SEO (para mejor posicionamiento en Google)
+  // 13. TIPO DE NEGOCIO (para Schema.org)
+  // ==========================================
+  cuisine: "Cocina Argentina",  // Tipo de cocina o categoría del negocio — reemplazar con el real
+  priceRange: "$$",             // Rango de precios: $ (económico), $$ (moderado), $$$ (caro)
+
+  // ==========================================
+  // 14. SEO (para mejor posicionamiento en Google)
   // ==========================================
   seo: {
     keywords: "restaurante, comida, san juan, argentina",  // Palabras clave separadas por coma

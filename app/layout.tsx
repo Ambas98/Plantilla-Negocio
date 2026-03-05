@@ -5,6 +5,7 @@ import { siteConfig } from '@/config/client-config'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import WhatsAppButton from '@/components/WhatsAppButton'
+import { SchemaOrg } from '@/components/SchemaOrg'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -26,7 +27,9 @@ export const metadata: Metadata = {
   openGraph: {
     title: siteConfig.businessName,
     description: siteConfig.description,
-    images: siteConfig.seo?.ogImage ? [{ url: siteConfig.seo.ogImage, width: 1200, height: 630 }] : [],
+    images: siteConfig.seo?.ogImage
+      ? [{ url: siteConfig.seo.ogImage, width: 1200, height: 630 }]
+      : [{ url: '/images/og-default.jpg', width: 1200, height: 630 }],
     locale: 'es_AR',
     type: 'website',
   },
@@ -34,7 +37,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: siteConfig.businessName,
     description: siteConfig.description,
-    images: siteConfig.seo?.ogImage ? [siteConfig.seo.ogImage] : [],
+    images: siteConfig.seo?.ogImage ? [siteConfig.seo.ogImage] : ['/images/og-default.jpg'],
   },
   robots: {
     index: true,
@@ -59,6 +62,7 @@ export default function RootLayout({
             --text-light-color: ${siteConfig.colors.textLight};
           }
         `}</style>
+        <SchemaOrg />
       </head>
       <body className={inter.className}>
         <a href="#main-content" className="skip-to-content">

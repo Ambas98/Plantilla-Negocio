@@ -31,3 +31,6 @@ yarn-error.log*
 # Typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Claude Code — credenciales locales (nunca commitear)
+.claude/settings.local.json

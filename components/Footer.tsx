@@ -13,6 +13,10 @@ const socialIcons = {
   linkedin:  FaLinkedin,
 }
 
+function isSocialPlatform(key: string): key is keyof typeof socialIcons {
+  return key in socialIcons
+}
+
 const daysOrder = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'] as const
 const daysShort: Record<string, string> = {
   monday: 'Lun', tuesday: 'Mar', wednesday: 'Mié',
@@ -94,8 +98,8 @@ export default function Footer() {
             <div className="flex flex-wrap gap-3">
               {Object.entries(siteConfig.social).map(([platform, url]) => {
                 if (!url) return null
-                const Icon = socialIcons[platform as keyof typeof socialIcons]
-                if (!Icon) return null
+                if (!isSocialPlatform(platform)) return null
+                const Icon = socialIcons[platform]
                 return (
                   <a
                     key={platform}

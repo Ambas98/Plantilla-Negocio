@@ -167,17 +167,18 @@ Si te trabás:
 
 ## 💰 RECORDATORIO DE PRECIOS
 
-Por cliente:
-- Setup: $150,000 (pago único)
-- Mantenimiento: $15,000/mes
+### Plan Básico
+- Setup: $200,000 ARS (pago único) — entrega 7-10 días hábiles
+- Mantenimiento: $20,000 ARS/mes
+- Incluye: 1 página con scroll, menú, galería básica, contacto, mapa, SEO básico, mobile-first
 
-Mantenimiento incluye:
-- Actualizar precios/menú
-- Cambiar fotos
-- Actualizar horarios
-- Soporte por WhatsApp
+### Plan Completo
+- Setup: $250,000 ARS (pago único) — entrega 10-15 días hábiles
+- Mantenimiento: $25,000 ARS/mes
+- Incluye: todo el básico + múltiples páginas, galería con lightbox, formulario de reserva, Schema.org, Google Analytics 4, reporte mensual de visitas por WhatsApp
 
-**Con 10 clientes = $150,000/mes recurrente + $1,500,000 en setups**
+**Con 10 clientes básicos = $200,000/mes recurrente + $2,000,000 en setups**
+**Con 10 clientes completos = $250,000/mes recurrente + $2,500,000 en setups**
 
 ---
 

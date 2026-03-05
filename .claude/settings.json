@@ -1,0 +1,39 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|MultiEdit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node -e \"const fs=require('fs'); process.stdin.resume(); let d=''; process.stdin.on('data',c=>d+=c); process.stdin.on('end',()=>{ try{ const j=JSON.parse(d); const fp=j.tool_input&&j.tool_input.file_path||''; if(/\\.(ts|tsx)$/.test(fp)){ require('child_process').execSync('npx prettier --write \"'+fp+'\"',{stdio:'pipe'}); } }catch(e){} process.exit(0); });\"",
+            "timeout": 30
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node -e \"process.stdin.resume(); let d=''; process.stdin.on('data',c=>d+=c); process.stdin.on('end',()=>{ try{ const j=JSON.parse(d); const fp=j.tool_input&&j.tool_input.file_path||''; const blocked=['.env','.env.local','package-lock.json']; if(blocked.some(b=>fp.endsWith(b))){ process.stderr.write('BLOQUEADO: '+fp+' es un archivo protegido. No modificar directamente.'); process.exit(2); } }catch(e){} process.exit(0); });\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "powershell.exe -NoProfile -Command \"Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show('Tarea terminada', 'Claude Code') | Out-Null\"",
+            "timeout": 15
+          }
+        ]
+      }
+    ]
+  }
+}
